@@ -16,24 +16,35 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 */
 
 Route::get('/', function () {
-    // return view('my_blog');
+    return view('my_blog');    //section 02 view route link
 
-    // use model with directory
-    // return view('my_blog', [
-    //     "my_blog" => Post::all()
+    //use model with directory   // other way , section 02 
+    // return view('posts', [
+    //     "posts" => Post::all()
     // ]);
-    $posts = [];
 
-    foreach($files as $file) {
-        $path = __DIR__."/../resources/posts/my_first_blog.html";
-        $document = YamlFrontMatter::parse($path);
+    // $document = YamlFrontMatter::parseFile(resource_path('posts/my_first_blog.html'));
+    // ddd($document);
 
-        $posts[] = new Post (
-            $document -> title,
-        );
-    }
+    // other way for html-file
+    // $files = File::files(resource_path("posts"));
 
-    ddd($document);
+    // $posts = [];
+    // foreach($files as $file) {
+    //     $document = YamlFrontMatter::parseFile($file);
+
+    //     $posts[] = new Post (
+    //         $document -> title,
+    //         $document -> excerpt,
+    //         $document -> date,
+    //         $document -> body(),
+    //         $document -> slug
+    //     );
+    //     // ddd($posts);
+    // }
+    //     return view('posts', [
+    //         "posts" => $posts
+    //     ]);
 });
 
 // section 2 , 07 (make a route and link to it)
