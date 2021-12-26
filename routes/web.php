@@ -83,3 +83,34 @@ Route::get('posts/{post}', function ($slug) {
         'post' => $post // return $post 
     ]);
 });
+
+
+//section_03 
+//section_03 , part_01 (Blade the absolute basic)
+Route::get('/section03/posts', function () {
+    $files = File::files(resource_path("posts"));
+
+    $posts = [];
+    foreach($files as $file) {
+        $document = YamlFrontMatter::parseFile($file);
+
+        $posts[] = new Post (
+            $document -> title,
+            $document -> excerpt,
+            $document -> date,
+            $document -> body(),
+            $document -> slug
+        );
+        // ddd($posts);
+    }
+        return view('section_03/posts', [
+            "posts" => $posts
+        ]);
+});
+Route::get('posts/{post}', function ($slug) {
+    $post = Post::findOrFail($slug);
+
+    return view('post',[
+        'post' => $post // return $post 
+    ]);
+});

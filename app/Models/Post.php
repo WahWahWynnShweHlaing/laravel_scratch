@@ -68,9 +68,25 @@ class Post
     
         return $post = file_get_contents($path);
 
-        // otherr way , section 02 , 12 (find a composer package for metadata)
-            // $posts = static::all();
-            // return $posts->firstWhere('slug', $slug);
+        // other way , section 02 , 12 (find a composer package for metadata)
+            //return static::all()->firstWhere('slug', $slug);
+
+    }
+
+    /**
+     * section_03 A Few Tweaks and Consideration
+     * 
+     * @param $slug
+     */
+    public static function findOrFail($slug) 
+    {
+            $post = static::find($slug);
+
+            if(! $post) {
+                throw new ModelNotFoundException();
+            }
+            return $post;
+
     }
 
 }
