@@ -16,12 +16,12 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 */
 
 Route::get('/', function () {
-    return view('my_blog');    //section 02 view route link
+    // return view('my_blog');    //section 02 view route link
 
     //use model with directory   // other way , section 02 
-    // return view('posts', [
-    //     "posts" => Post::all()
-    // ]);
+    return view('posts', [
+        "posts" => Post::with('category')->get()
+    ]);
 
     // $document = YamlFrontMatter::parseFile(resource_path('posts/my_first_blog.html'));
     // ddd($document);
