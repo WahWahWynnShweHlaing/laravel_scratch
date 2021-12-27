@@ -13,6 +13,11 @@ class Post extends Model
     
     protected $guarded = [];
 
+    /**
+     * section 04 , Eager Load Relationships on an Existing Model
+     */
+    // protected $with = ['category' , 'author'];
+
     // protected $fillable = ['title','excerpt','body', 'id'];
 
     /**
