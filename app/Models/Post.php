@@ -9,13 +9,25 @@ class Post extends Model
 {
     use HasFactory;
     
-    protected $guarded = ['id'];
+    protected $guarded = [];
 
     // protected $fillable = ['title','excerpt','body', 'id'];
 
-    //section 04 Route Model Binding
+    /**
+     * section 04 Route Model Binding
+     * 
+     */
     // public function getRouteKeyName()
     // {
     //     return 'slug';
     // }
+
+    /**
+     * section 04 ,Your First Eloquent Relationship
+     * 
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
