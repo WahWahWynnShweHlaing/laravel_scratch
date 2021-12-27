@@ -21,9 +21,9 @@ Route::get('/', function () {
     // return view('my_blog');    //section 02 view route link
 
     //use model with directory   // other way , section 02 
-    return view('posts', [
-        "posts" => Post::latest('published_at')->with(['category' , 'author'])->get()
-    ]);
+    // return view('posts', [
+    //     "posts" => Post::latest('published_at')->with(['category' , 'author'])->get()
+    // ]);
 
     // $document = YamlFrontMatter::parseFile(resource_path('posts/my_first_blog.html'));
     // ddd($document);
@@ -47,6 +47,9 @@ Route::get('/', function () {
     //     return view('posts', [
     //         "posts" => $posts
     //     ]);
+
+    // section_05 Convert the HTML and CSS to Blade
+    return view('section_03/components/layout');
 });
 
 // section 2 , 07 (make a route and link to it)
