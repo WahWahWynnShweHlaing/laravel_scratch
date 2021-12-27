@@ -16,29 +16,35 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::truncate();
-        Post::truncate();
-        Category::truncate();
+        // User::truncate();
+        // Post::truncate();
+        // Category::truncate();
 
-        $user = User::factory()->create();
-
-        $personal = Category::create([
-            'name' => 'Personal',
-            'slug' => 'personal'
+        $user = User::factory()->create([ //Turbo Boost With Factories
+            'name'=> 'John'
         ]);
 
-        $family = Category::create([
-            'name' => 'Family',
-            'slug' => 'family'
-        ]);
+        // Post::factory(5)->create();
 
-        Post::create([
-            'user_id' => $user->id,
-            'category_id' => $family->id,
-            'title' => 'hello',
-            'slug' => 'my_first_blog',
-            'excerpt' => '<p>my excerpt</p>',
-            'body' => '<p>hello,i am here</p>'
-        ]);
+        // $user = User::factory()->create();
+
+        // $personal = Category::create([
+        //     'name' => 'Personal',
+        //     'slug' => 'personal'
+        // ]);
+
+        // $family = Category::create([
+        //     'name' => 'Family',
+        //     'slug' => 'family'
+        // ]);
+
+        // Post::create([
+        //     'user_id' => $user->id,
+        //     'category_id' => $family->id,
+        //     'title' => 'hello',
+        //     'slug' => 'my_first_blog',
+        //     'excerpt' => '<p>my excerpt</p>',
+        //     'body' => '<p>hello,i am here</p>'
+        // ]);
     }
 }
