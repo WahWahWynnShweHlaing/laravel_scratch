@@ -114,3 +114,11 @@ Route::get('posts/{post}', function ($slug) {
         'post' => $post // return $post 
     ]);
 });
+
+//section_04
+Route::get('categories/{category:slug}', function (Category $category) {
+
+    return view('posts',[
+        'posts' => $category->posts 
+    ]);
+});
