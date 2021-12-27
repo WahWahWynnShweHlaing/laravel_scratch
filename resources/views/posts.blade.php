@@ -10,10 +10,10 @@
                 <!-- section 2 , 06 (include css and javascript) --> 
                 <h1>
                     <a href="/posts/<?= $post->id; ?>">
-                        <?= $post->title ?>
+                        {!! $post->title !!}
                     </a>
                 </h1>
-                <div><?= $post->body ?></div>
+                <div>{!! $post->body !!}</div>
         </article>
         <?php endforeach; ?>
         <a href="/">Go Back</a>
