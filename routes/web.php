@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
+use App\Models\User;
+use App\Models\Category;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 /*
@@ -20,7 +22,7 @@ Route::get('/', function () {
 
     //use model with directory   // other way , section 02 
     return view('posts', [
-        "posts" => Post::with('category')->get()
+        "posts" => Post::latest('published_at')->with(['category' , 'author'])->get()
     ]);
 
     // $document = YamlFrontMatter::parseFile(resource_path('posts/my_first_blog.html'));
@@ -120,5 +122,12 @@ Route::get('categories/{category:slug}', function (Category $category) {
 
     return view('posts',[
         'posts' => $category->posts 
+    ]);
+});
+
+Route::get('authors/{author:username}', function (User $author) {
+
+    return view('posts',[
+        'posts' => $author->posts 
     ]);
 });

@@ -37,8 +37,8 @@ class Post extends Model
      * section 04 , Database Seeding Saves Timep
      * 
      */
-    public function user()
+    public function author()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class , 'user_id');
     }
 }

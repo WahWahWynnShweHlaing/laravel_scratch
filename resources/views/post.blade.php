@@ -11,7 +11,7 @@
                     {!! $post->title !!}
                 </h1>
                 <p>
-                    By<a href="#">{{ $post->user->name }}</a><a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
+                    By<a href="/authors/{{ $post->author->username }}">{{ $post->author->name }}</a> in <a href="/categories/{{ $post->author->id }}">{{ $post->author->name }}</a>
                 </p>
                 <div>
                     {!! $post->body !!}
