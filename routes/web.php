@@ -76,8 +76,8 @@ Route::get('posts/{post}', function ($slug) {
 
 
 // section 2 , 11 (use filesystem class to read the Directory)
-Route::get('posts/{post}', function ($slug) {
-    $post = Post::find($slug);
+Route::get('posts/{post}', function ($id) {
+    $post = Post::find($id);
 
     return view('post',[
         'post' => $post // return $post 

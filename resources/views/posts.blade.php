@@ -9,7 +9,7 @@
         <article>
                 <!-- section 2 , 06 (include css and javascript) --> 
                 <h1>
-                    <a href="/posts/<?= $post->slug; ?>">
+                    <a href="/posts/<?= $post->id; ?>">
                         <?= $post->title ?>
                     </a>
                 </h1>
