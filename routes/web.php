@@ -50,7 +50,8 @@ Route::get('/', function () {
 
     // section_05 Convert the HTML and CSS to Blade
     return view('section_03/posts',[
-        "posts" => Post::latest('published_at')->with(['category' , 'author'])->get()
+        "posts" => Post::latest('published_at')->with(['category' , 'author'])->get(),
+        'categories' => Category::all()
     ]);
 });
 
@@ -126,13 +127,16 @@ Route::get('posts/{post}', function ($slug) {
 Route::get('categories/{category:slug}', function (Category $category) {
 
     return view('posts',[
-        'posts' => $category->posts->load(['category' , 'author'])
+        'posts' => $category->posts->load(['category' , 'author']),
+        'currentCategory' => $category,
+        'categories' => Category::all()
     ]);
 });
 
 Route::get('authors/{author:username}', function (User $author) {
 
     return view('posts',[
-        'posts' => $author->posts->load(['category' , 'author'])
+        'posts' => $author->posts->load(['category' , 'author']),
+        'categories' => Category::all()
     ]);
 });
