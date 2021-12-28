@@ -29,7 +29,7 @@
                         </header>
 
                         <div class="text-sm mt-2">
-                            {{$post->body}}
+                            {!! $post->body !!}
                         </div>
 
                         <footer class="flex justify-between items-center mt-8">

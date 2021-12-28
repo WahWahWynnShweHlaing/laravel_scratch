@@ -5,7 +5,7 @@
                 {{ $trigger }}
             </div>
         {{-- Links --}}
-        <div x-show="show" class="py-2 absolute z-50" style="display : none">
+        <div x-show="show" class="py-2 absolute z-50 max-h-52" style="display : none">
             {{$slot}}
         </div>
 </div>
