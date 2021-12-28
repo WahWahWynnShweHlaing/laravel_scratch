@@ -53,7 +53,7 @@ Route::get('/', function () {
         "posts" => Post::latest('published_at')->with(['category' , 'author'])->get(),
         'categories' => Category::all()
     ]);
-});
+})->name('home');
 
 // section 2 , 07 (make a route and link to it)
 Route::get('/post', function () {
@@ -131,7 +131,7 @@ Route::get('categories/{category:slug}', function (Category $category) {
         'currentCategory' => $category,
         'categories' => Category::all()
     ]);
-});
+})->name('category');
 
 Route::get('authors/{author:username}', function (User $author) {
 
