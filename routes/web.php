@@ -5,6 +5,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,49 +18,7 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 |
 */
 
-Route::get('/', function () {
-    // return view('my_blog');    //section 02 view route link
-
-    //use model with directory   // other way , section 02 
-    // return view('posts', [
-    //     "posts" => Post::latest('published_at')->with(['category' , 'author'])->get()
-    // ]);
-
-    // $document = YamlFrontMatter::parseFile(resource_path('posts/my_first_blog.html'));
-    // ddd($document);
-
-    // other way for html-file
-    // $files = File::files(resource_path("posts"));
-
-    // $posts = [];
-    // foreach($files as $file) {
-    //     $document = YamlFrontMatter::parseFile($file);
-
-    //     $posts[] = new Post (
-    //         $document -> title,
-    //         $document -> excerpt,
-    //         $document -> date,
-    //         $document -> body(),
-    //         $document -> slug
-    //     );
-    //     // ddd($posts);
-    // }
-    //     return view('posts', [
-    //         "posts" => $posts
-    //     ]);
-
-    // section_05 Convert the HTML and CSS to Blade
-    $posts = Post::latest('published_at')->with(['category' , 'author']);
-
-    if(request('search')) {
-        $posts->where('title', 'like' , '%' . request('search'). '%')
-              ->orwhere('body', 'like' , '%' . request('search'). '%');
-    }
-    return view('section_03/posts',[
-        "posts" => $posts->get(),
-        'categories' => Category::all()
-    ]);
-})->name('home');
+Route::get('/', [PostController::class,'index' ])->name('home');
 
 // section 2 , 07 (make a route and link to it)
 Route::get('/post', function () {
@@ -89,14 +48,7 @@ Route::get('posts/{post}', function ($slug) {
 // })->whereNumber('post');  // section 2 , 09 (route wildcard constraints)
 
 
-// section 2 , 11 (use filesystem class to read the Directory)
-Route::get('posts/{post:slug}', function (Post $post) { // Post::where('slug',$post)->firstOrFail(), Route Model Binding
-    // $post = Post::find($id);
-
-    return view('post',[
-        'post' => $post // return $post 
-    ]);
-});
+Route::get('posts/{post:slug}', [PostController::class , 'show']);
 
 
 //section_03 
