@@ -49,8 +49,14 @@ Route::get('/', function () {
     //     ]);
 
     // section_05 Convert the HTML and CSS to Blade
+    $posts = Post::latest('published_at')->with(['category' , 'author']);
+
+    if(request('search')) {
+        $posts->where('title', 'like' , '%' . request('search'). '%')
+              ->orwhere('body', 'like' , '%' . request('search'). '%');
+    }
     return view('section_03/posts',[
-        "posts" => Post::latest('published_at')->with(['category' , 'author'])->get(),
+        "posts" => $posts->get(),
         'categories' => Category::all()
     ]);
 })->name('home');
