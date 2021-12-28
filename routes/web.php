@@ -49,7 +49,9 @@ Route::get('/', function () {
     //     ]);
 
     // section_05 Convert the HTML and CSS to Blade
-    return view('section_03/components/layout');
+    return view('section_03/posts',[
+        "posts" => Post::latest('published_at')->with(['category' , 'author'])->get()
+    ]);
 });
 
 // section 2 , 07 (make a route and link to it)
