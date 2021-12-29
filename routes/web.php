@@ -7,6 +7,7 @@ use App\Models\Category;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SessionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,6 +101,7 @@ Route::get('authors/{author:username}', function (User $author) {
 });
 
 //section_09 Build a Register User Page
-Route::get('register', [RegisterController::class,'create' ]);
-Route::post('register', [RegisterController::class,'store' ]);
+Route::get('register', [RegisterController::class,'create' ])->middleware('guest');
+Route::post('register', [RegisterController::class,'store' ])->middleware('guest');
+Route::post('logout', [SessionsController::class,'destory' ]);
 
