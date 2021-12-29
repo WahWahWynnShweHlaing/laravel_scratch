@@ -47,6 +47,24 @@ class User extends Authenticatable
     ];
 
     /**
+     * section_09 Automatic Password Hashing With Mutators
+     * 
+     */
+    // public function getUsernameAttribute($username)
+    // {
+    //     return ucwords($username);
+    // }
+
+    /**
+     * section_09 Automatic Password Hashing With Mutators
+     * 
+     */
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
+
+    /**
      * section 04 , Database Seeding Saves Timep
      * 
      */
