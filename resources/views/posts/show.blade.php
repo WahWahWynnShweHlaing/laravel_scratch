@@ -31,6 +31,13 @@
                         <div class="text-sm mt-2">
                             {!! $post->body !!}
                         </div>
+                        <section class="col-span-8 col-start-5 mt-10">
+                            <x-post-comment />
+                            <x-post-comment />
+                            <x-post-comment />
+                            <x-post-comment />
+                        </section>
+
 
                         <footer class="flex justify-between items-center mt-8">
                             <div class="flex items-center text-sm">

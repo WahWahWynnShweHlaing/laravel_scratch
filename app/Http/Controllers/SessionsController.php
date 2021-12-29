@@ -25,13 +25,14 @@ class SessionsController extends Controller
             'password' => 'required'
         ]);
 
-        if(auth()->attempt($attributes)){
-            session()->regenerate();
-            return redirect('/')->with('success','Welcome Back');
+        if(! auth()->attempt($attributes)) {
+            throw ValidationException::withMessages(['email' => 'Your email is invaild!!!!']);
+            // return back()->withErrors(['email' => 'Your email is invaild!!!!']);
         }
 
-        throw ValidationException::withMessages(['email' => 'Your email is invaild!!!!']);
-        // return back()->withErrors(['email' => 'Your email is invaild!!!!']);
+        session()->regenerate();
+        return redirect('/')->with('success','Welcome Back');
+
     }
 
     /**
