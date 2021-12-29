@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Category;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,3 +98,8 @@ Route::get('authors/{author:username}', function (User $author) {
         'posts' => $author->posts->load(['category' , 'author'])
     ]);
 });
+
+//section_09 Build a Register User Page
+Route::get('register', [RegisterController::class,'create' ]);
+Route::post('register', [RegisterController::class,'store' ]);
+
