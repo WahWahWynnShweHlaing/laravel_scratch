@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Comment;
 
 class Post extends Model
 {
@@ -62,6 +63,14 @@ class Post extends Model
         $query->when($filters['author'] ?? false, fn($query,$author) =>
         $query->whereHas('author' , fn($query) =>
         $query->where('username',$author))
-);
+        );
+    }
+
+    /**
+     * section_10 function for comment
+     */
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
     }
 }
