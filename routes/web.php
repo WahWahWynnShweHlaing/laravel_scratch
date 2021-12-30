@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
-use Spatie\YamlFrontMatter\YamlFrontMatter;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
@@ -20,6 +19,22 @@ use App\Http\Controllers\PostCommentsController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('ping', function() {
+    $mailchimp = new \MailchimpMarketing\ApiClient();
+
+    $mailchimp->setConfig([
+        'apiKey' => config('services.mailchimp.key'),
+        'server' => 'us20'
+    ]);
+
+    // $response = $mailchimp->ping->get();
+    $response = $mailchimp->lists->getAllLists();
+    // $response = $mailchimp->lists->addListMember('d3c0c95629',[
+    //     'email_address' => 'wahwahwynnshwe@gmail.com',
+    //     'status' => 'subscribed'
+    // ]);
+    ddd($response);
+});
 
 Route::get('/', [PostController::class,'index' ])->name('home');
 
