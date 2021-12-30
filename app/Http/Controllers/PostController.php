@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
@@ -30,12 +30,8 @@ class PostController extends Controller
         ]);
     }
 
-    protected function create()
+    public function create()
     {
-
-        If(auth()->user()?->username != 'JISUNG1'){
-            abort(Response::HTTP_FORBIDDEN);
-        }
         return view('posts.create');
     }
 }
