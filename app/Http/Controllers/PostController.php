@@ -12,10 +12,6 @@ class PostController extends Controller
 {
     public function index()
     {
-        // return Post::latest()->filter(
-        //     request(['search','category','author'])
-        // )->paginate(3);
-
         return view('posts.index',[
             "posts" => Post::latest()->filter(
                     request(['search','category','author'])
@@ -28,31 +24,5 @@ class PostController extends Controller
         return view('posts.show',[
             "post" => $post
         ]);
-    }
-
-    public function create()
-    {
-        return view('posts.create');
-    }
-
-    public function store()
-    {
-        $attributes = request()->validate([
-            'title' => 'required',
-            'thumbnail' => 'required|image',
-            'slug' => 'required',
-            'excerpt'=>'required',
-            'body'=> 'required',
-            'category_id' => 'required'
-        ]);
-
-
-        $attributes['user_id'] = auth()->id();
-        $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
-
-        Post::create($attributes);
-
-        return redirect('/');
-
     }
 }
