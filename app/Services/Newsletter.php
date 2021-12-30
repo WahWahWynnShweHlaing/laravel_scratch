@@ -7,7 +7,7 @@ class Newsletter
 {
     public function subscribe(string $email, string $list = null)
     {
-        $list ??='services.mailchimp.lists.subscribers';
+        $list ??= config('services.mailchimp.lists.subscribers');
 
         return $this->client()->lists->addListMember($list,[
             'email_address' => $email,

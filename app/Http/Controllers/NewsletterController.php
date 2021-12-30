@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Services\Newsletter;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 class NewsletterController extends Controller
@@ -12,7 +11,6 @@ class NewsletterController extends Controller
         request()->validate(['email' => 'required|email']);
 
             try{
-                Log::info("invoke con");
                 // $newsletter = new Newsletter();
                 $newsletter->subscribe(request('email'));
             }catch(\Exception $e){
