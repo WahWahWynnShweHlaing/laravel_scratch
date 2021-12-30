@@ -8,6 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\PostCommentsController;
+use App\Http\Controllers\NewsletterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,29 +20,7 @@ use App\Http\Controllers\PostCommentsController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::post('newsletter', function() {
-    request()->validate(['email' => 'required|email']);
-    $mailchimp = new \MailchimpMarketing\ApiClient();
-
-    $mailchimp->setConfig([
-        'apiKey' => config('services.mailchimp.key'),
-        'server' => 'us20'
-    ]);
-
-    // $response = $mailchimp->ping->get();
-    // $response = $mailchimp->lists->getAllLists();
-    try{
-        $response = $mailchimp->lists->addListMember('d3c0c95629',[
-            'email_address' => request('email'),
-            'status' => 'subscribed'
-        ]);
-    }catch(\Exception $e){
-        throw Illuminate\Validation\ValidationException::withMessages([
-            'email'=> 'this email is not be added to news letter',
-        ]);
-    }
-    return redirect('/')->with('success' , 'You r now singed up for our newsletter!!');
-});
+Route::post('newsletter', [NewsletterController::class, 'index']);
 
 Route::get('/', [PostController::class,'index' ])->name('home');
 
