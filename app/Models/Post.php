@@ -12,7 +12,7 @@ class Post extends Model
 {
     use HasFactory;
     
-    protected $guarded = [];
+    // protected $guarded = [];
 
     /**
      * section 04 , Eager Load Relationships on an Existing Model

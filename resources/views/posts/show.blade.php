@@ -32,29 +32,36 @@
                             {!! $post->body !!}
                         </div>
                         <section class="col-span-8 col-start-5 mt-10">
-                            <x-panel>
-                                <form action="#" method="POST">
-                                    <header class="flex items-center">
-                                        <img src="https://i.pravatar.cc/100?id={{ auth()->id() }}" alt="" width="40" height="60">
-                                        <h2 class="ml-4">Want to Participate?</h2>
-                                    </header>
+                            @auth
+                                <x-panel>
+                                    <form action="/posts/{{ $post->slug }}/comments" method="POST">
+                                        @csrf
+                                        <header class="flex items-center">
+                                            <img src="https://i.pravatar.cc/100?id={{ auth()->id() }}" alt="" width="40" height="60">
+                                            <h2 class="ml-4">Want to Participate?</h2>
+                                        </header>
 
-                                    <div class="mt-10">
-                                        <textarea name="body" class="w-full" cols="30" rows="10" placeholder="Quick , think of something to say!">
-                                        </textarea>
-                                    </div>
+                                        <div class="mt-10">
+                                            <textarea name="body" class="w-full" cols="30" rows="10" placeholder="Quick , think of something to say!">
+                                            </textarea>
+                                        </div>
 
-                                    <div class="flex justify-end mt-10 border-t border-gray-200 pt-6">
-                                        <button type="submit" class="bg-blue-500 text-white uppercase font-semibold text-xs py-2 px-10 rounded-2xl hover:bg-blue-500">
-                                            Post
-                                        </button>
-                                    </div>
-                                </form>
+                                        <div class="flex justify-end mt-10 border-t border-gray-200 pt-6">
+                                            <button type="submit" class="bg-blue-500 text-white uppercase font-semibold text-xs py-2 px-10 rounded-2xl hover:bg-blue-500">
+                                                Post
+                                            </button>
+                                        </div>
+                                    </form>
 
-                            </x-panel>
+                                </x-panel>
+                                @else
+                                    <p>
+                                    <a href="/register" class="hover:underline"> Register </a> or <a href="/login" class="hover:underline">Log in </a> to Participate in comments
+                                    </p>
+                            @endauth
 
-                            @foreach($post->comments as $comment)
-                            <x-post-comment :comment="comment"/>
+                            @foreach ($post->comment as $comment)
+                            <x-post-comment :comment="$comment"/>
                             @endforeach
                         </section>
 
